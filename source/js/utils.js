@@ -234,8 +234,12 @@ const btf = {
       ele.forEach(i => {
         if (i.parentNode.tagName !== 'A') {
           const dataSrc = i.dataset.lazySrc || i.src
+          const dataThumb = i.dataset.thumb || dataSrc
+          if (i.dataset.thumb) {
+            i.dataset.lazySrc = i.dataset.thumb
+          }
           const dataCaption = i.title || i.alt || ''
-          btf.wrap(i, 'a', { href: dataSrc, 'data-fancybox': 'gallery', 'data-caption': dataCaption, 'data-thumb': dataSrc })
+          btf.wrap(i, 'a', { href: dataSrc, 'data-fancybox': 'gallery', 'data-caption': dataCaption, 'data-thumb': dataThumb })
         }
       })
 
