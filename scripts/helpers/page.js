@@ -12,7 +12,7 @@ const crypto = require('crypto')
 
 hexo.extend.helper.register('page_description', function () {
   const { config, page } = this
-  let description = page.description || page.content || page.title || config.description
+  let description = page.description || page.excerpt || page.content || config.description || page.title
 
   if (description) {
     description = escapeHTML(stripHTML(description).substring(0, 150)
@@ -99,4 +99,21 @@ hexo.extend.helper.register('isImgOrUrl', function (path) {
     return true
   }
   return false
+})
+
+hexo.extend.helper.register('page_keywords', function () {
+  const { config, page } = this
+  if (page.keywords) {
+    return Array.isArray(page.keywords) ? (page.keywords).join(',') : ([]).join(',') || page.keywords
+  }
+
+  const keywords = [
+    ...(page.categories?.data?.map((category) => category.name) || []),
+    ...(page.tags?.data?.map((tag) => tag.name) || []),
+    ...(page.extra_keywords || [])
+  ]
+  if (keywords.length) {
+    return keywords.join(',')
+  }
+  return Array.isArray(config.keywords) ? (config.keywords).join(','):  ([]).join(',') || config.keywords
 })

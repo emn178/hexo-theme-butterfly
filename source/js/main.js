@@ -763,10 +763,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const lazyloadImg = () => {
     window.lazyLoadInstance = new LazyLoad({
-      elements_selector: 'img',
+      elements_selector: 'iframe,img',
       threshold: 0,
       data_src: 'lazy-src'
     })
+
+    const lazyIframeLoad = (e) => {
+      e.target.removeEventListener('load', lazyIframeLoad)
+      if (e.target.contentDocument && e.target.contentDocument.head) {
+        const style = document.createElement('style')
+        style.textContent = 'body { display: flex; align-items: center; justify-content: center }'
+        e.target.contentDocument.head.appendChild(style)
+      }
+    }
+
+    for (let element of document.querySelectorAll('iframe[data-lazy-src]')) {
+      element.addEventListener('load', lazyIframeLoad)
+    }
   }
 
   const relativeDate = function (selector) {
