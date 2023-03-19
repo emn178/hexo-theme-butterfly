@@ -25,7 +25,7 @@ hexo.extend.helper.register('aside_archives', function (options = {}) {
     format = type === 'monthly' ? 'MMMM YYYY' : 'YYYY'
   }
 
-  const posts = this.site.posts.sort('date', order)
+  const posts = this.site.languages[this.page.lang].posts.sort('date', order)
   if (!posts.length) return result
 
   const data = []
@@ -63,7 +63,7 @@ hexo.extend.helper.register('aside_archives', function (options = {}) {
       url += `${item.month}/`
     }
 
-    return this.url_for(url)
+    return this.url_for_i18n(url)
   }
 
   const len = data.length
@@ -72,7 +72,7 @@ hexo.extend.helper.register('aside_archives', function (options = {}) {
   result += `<div class="item-headline"><i class="fas fa-archive"></i><span>${this._p('aside.card_archives')}</span>`
 
   if (len > Judge) {
-    result += `<a class="card-more-btn" href="${this.url_for(archiveDir)}/" title="${this._p('aside.more_button')}">
+    result += `<a class="card-more-btn" href="${this.url_for_i18n(archiveDir)}/" title="${this._p('aside.more_button')}">
     <i class="fas fa-angle-right"></i></a>`
   }
 

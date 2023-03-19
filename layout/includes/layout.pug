@@ -4,7 +4,7 @@
 - var pageType = is_post() ? 'post' : 'page'
 
 doctype html
-html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside)
+html(lang=page.lang data-theme=theme.display_mode class=htmlClassHideAside)
   head
     include ./head.pug
   body
@@ -14,7 +14,7 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
     if theme.background
       #web_bg
       
-    !=partial('includes/sidebar', {}, {cache: true})
+    !=partial_i18n('includes/sidebar')
 
     if page.type !== '404'
       #body-wrap(class=pageType)
@@ -38,7 +38,7 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
           - var footer_bg = ''
 
         footer#footer(style=footer_bg)
-          !=partial('includes/footer', {}, {cache: true})
+          !=partial_i18n('includes/footer')
 
     else
       include ./404.pug

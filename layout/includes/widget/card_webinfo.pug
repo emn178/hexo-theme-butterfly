@@ -7,7 +7,7 @@ if theme.aside.card_webinfo.enable
       if theme.aside.card_webinfo.post_count
         .webinfo-item
           .item-name= _p('aside.card_webinfo.article_name') + " :"
-          .item-count= site.posts.length
+          .item-count= site.languages[page.lang].posts.length
       if theme.runtimeshow.enable
         .webinfo-item
           .item-name= _p('aside.card_webinfo.runtime.name') + " :"
@@ -32,4 +32,3 @@ if theme.aside.card_webinfo.enable
           .item-name= _p('aside.card_webinfo.last_push_date.name') + " :"
           .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
             i.fa-solid.fa-spinner.fa-spin
-

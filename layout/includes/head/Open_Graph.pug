@@ -9,6 +9,6 @@ if theme.Open_Graph_meta.enable
       description: page_description(),
     }, theme.Open_Graph_meta.option)
   -
-  != open_graph(ogOption)
+  != open_graph_i18n(ogOption)
 else
   meta(name="description" content=page_description())

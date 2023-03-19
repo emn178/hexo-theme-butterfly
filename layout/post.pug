@@ -24,7 +24,7 @@ block content
     if theme.post_pagination
       include includes/pagination.pug
     if theme.related_post && theme.related_post.enable
-      != related_posts(page,site.posts)
+      != related_posts(page,site.languages[page.lang].posts)
 
     if page.comments !== false && theme.comments && theme.comments.use
       - var commentsJsLoad = true

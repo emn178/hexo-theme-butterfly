@@ -9,8 +9,9 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
   if (!options && (!categories || !Object.prototype.hasOwnProperty.call(categories, 'length'))
   ) {
     options = categories
-    categories = this.site.categories
+    categories = this.site.languages[this.page.lang].categories
   }
+  const getCategoryLength = (category) => this.site.languages[this.page.lang].categoryPosts[category._id].length;
 
   if (!categories || !categories.length) return ''
   options = options || {}
@@ -21,7 +22,7 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
   const depth = options.depth ? parseInt(options.depth, 10) : 0
   const orderby = options.orderby || 'name'
   const order = options.order || 1
-  const categoryDir = this.url_for(config.category_dir)
+  const categoryDir = this.url_for_i18n(config.category_dir)
   const limit = options.limit === 0 ? categories.length : options.limit
   const isExpand = options.expand !== 'none'
   const expandClass = isExpand && options.expand === true ? 'expand' : ''
@@ -29,7 +30,7 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
   const prepareQuery = (parent) => {
     const query = {}
     if (parent) { query.parent = parent } else { query.parent = { $exists: false } }
-    return categories.find(query).sort(orderby, order).filter((cat) => cat.length)
+    return categories.find(query).sort(orderby, order).filter((cat) => getCategoryLength(cat))
   }
 
   const hierarchicalList = (t, level, parent, topparent = true) => {
@@ -50,12 +51,12 @@ hexo.extend.helper.register('aside_categories', function (categories, options) {
 
           result += `<li class="card-category-list-item ${parentClass}">`
 
-          result += `<a class="card-category-list-link" href="${this.url_for(cat.path)}">`
+          result += `<a class="card-category-list-link" href="${this.url_for_i18n(cat.path)}">`
 
           result += `<span class="card-category-list-name">${cat.name}</span>`
 
           if (showCount) {
-            result += `<span class="card-category-list-count">${cat.length}</span>`
+            result += `<span class="card-category-list-count">${getCategoryLength(cat)}</span>`
           }
 
           if (isExpand && isTopParent && child) {

@@ -80,7 +80,7 @@ case source
       typedJSFn.run(subtitleType)
 
   default
-    - subContent = subContent.length ? subContent : new Array(config.subtitle)
+    - subContent = subContent.length ? subContent : new Array(config.site[page.lang].subtitle)
     script.
       function subtitleType () {
         if (!{effect}) {

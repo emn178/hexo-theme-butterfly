@@ -1,11 +1,11 @@
 hexo.extend.helper.register('findArchiveLength', function (func) {
-  const allPostsLength = this.site.posts.length
+  const allPostsLength = this.site.languages[this.page.lang].posts.length
   if (hexo.config.archive_generator && hexo.config.archive_generator.enable === false) return allPostsLength
   const { yearly, monthly, daily } = hexo.config.archive_generator
   const { year, month, day } = this.page
   if (yearly === false || !year) return allPostsLength
 
-  const posts = this.site.posts.sort('date')
+  const posts = this.site.languages[this.page.lang].posts.sort('date')
 
   const compareFunc = (type, y1, m1, d1, y2, m2, d2) => {
     if (type === 'year') {

@@ -1,20 +1,21 @@
 - var pageTitle
-- is_archive() ? page.title = findArchivesTitle(page, theme.menu, date) : ''
+- is_archive() ? page.title = findArchivesTitle(page, theme.menu_i18n[page.lang], date) : ''
 - if (is_tag()) pageTitle = _p('page.tag') + ': ' + page.tag
 - else if (is_category()) pageTitle = _p('page.category') + ': ' + page.category
 - else if (is_current('/404.html', [strict])) pageTitle = _p('error404')
-- else pageTitle = page.title || config.title || ''
+- else pageTitle = page.title || config.site[page.lang].title || ''
 
-- var isSubtitle = config.subtitle ? ' - ' + config.subtitle : ''
-- var tabTitle = is_home() || !pageTitle ? config.title + isSubtitle : pageTitle + ' | ' + config.title
+- var isSubtitle = config.site[page.lang].subtitle ? ' - ' + config.site[page.lang].subtitle : ''
+- var tabTitle = is_home() || !pageTitle ? config.site[page.lang].title + isSubtitle : pageTitle + ' | ' + config.site[page.lang].title
 - var pageKeywords = page_keywords()
-- var pageAuthor = config.email ? config.author + ',' + config.email : config.author
-- var pageCopyright = config.copyright || config.author
+- var pageAuthor = config.email ? config.author + ',' + config.email : config.site[page.lang].author
+- var pageCopyright = config.copyright || config.site[page.lang].author
 - var themeColorLight = theme.theme_color && theme.theme_color.enable && theme.theme_color.meta_theme_color_light || '#ffffff'
 - var themeColorDark = theme.theme_color && theme.theme_color.enable && theme.theme_color.meta_theme_color_dark || '#0d0d0d'
 - var themeColor = theme.display_mode === 'dark' ? themeColorDark : themeColorLight
 
 meta(charset='UTF-8')
+meta(http-equiv="content-language" content=page.lang)
 meta(http-equiv="X-UA-Compatible" content="IE=edge")
 meta(name="viewport" content="width=device-width, initial-scale=1.0")
 title= tabTitle
@@ -62,7 +63,7 @@ if theme.blog_title_font &&　theme.blog_title_font.font_link
   link(rel='stylesheet' href=url_for(theme.blog_title_font.font_link) media="print" onload="this.media='all'")
 
 //- global config
-!=partial('includes/head/config', {}, {cache: true})
+!=partial_i18n('includes/head/config')
 
 include ./head/config_site.pug
 include ./head/noscript.pug

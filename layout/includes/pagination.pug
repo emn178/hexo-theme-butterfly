@@ -7,8 +7,8 @@
   }
 
 if is_post()
-  - let prev = theme.post_pagination === 1 ? page.prev : page.next
-  - let next = theme.post_pagination === 1 ? page.next : page.prev
+  - let prev = theme.post_pagination === 1 ? page.prev_i18n : page.next_i18n
+  - let next = theme.post_pagination === 1 ? page.next_i18n : page.prev_i18n
   nav#pagination.pagination-post
     if(prev)
       - var hasPageNext = next ? 'pull-left' : 'pull-full'

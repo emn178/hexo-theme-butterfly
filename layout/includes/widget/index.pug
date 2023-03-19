@@ -7,28 +7,28 @@
       .sticky_layout
         include ./card_post_toc.pug
     else
-      !=partial('includes/widget/card_author', {}, {cache: true})
-      !=partial('includes/widget/card_announcement', {}, {cache: true})
+      !=partial_i18n('includes/widget/card_author')
+      !=partial_i18n('includes/widget/card_announcement')
       !=partial('includes/widget/card_top_self', {}, {cache: true})
       .sticky_layout
         if showToc
           include ./card_post_toc.pug
-        !=partial('includes/widget/card_recent_post', {}, {cache: true})
+        !=partial_i18n('includes/widget/card_recent_post')
         !=partial('includes/widget/card_ad', {}, {cache: true})
   else
     //- page
-    !=partial('includes/widget/card_author', {}, {cache: true})
-    !=partial('includes/widget/card_announcement', {}, {cache: true})
+    !=partial_i18n('includes/widget/card_author')
+    !=partial_i18n('includes/widget/card_announcement')
     !=partial('includes/widget/card_top_self', {}, {cache: true})
 
     .sticky_layout
       if showToc
         include ./card_post_toc.pug
-      !=partial('includes/widget/card_recent_post', {}, {cache: true})
+      !=partial_i18n('includes/widget/card_recent_post')
       !=partial('includes/widget/card_ad', {}, {cache: true})
-      !=partial('includes/widget/card_newest_comment', {}, {cache: true})
-      !=partial('includes/widget/card_categories', {}, {cache: true})
-      !=partial('includes/widget/card_tags', {}, {cache: true})
-      !=partial('includes/widget/card_archives', {}, {cache: true})
-      !=partial('includes/widget/card_webinfo', {}, {cache: true})
+      !=partial_i18n('includes/widget/card_newest_comment')
+      !=partial_i18n('includes/widget/card_categories')
+      !=partial_i18n('includes/widget/card_tags')
+      !=partial_i18n('includes/widget/card_archives')
+      !=partial_i18n('includes/widget/card_webinfo')
       !=partial('includes/widget/card_bottom_self', {}, {cache: true})
