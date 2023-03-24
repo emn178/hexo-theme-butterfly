@@ -12,7 +12,8 @@ const crypto = require('crypto')
 
 hexo.extend.helper.register('page_description', function () {
   const { config, page } = this
-  let description = page.description || page.excerpt || page.content || config.description || page.title
+  const site = config.site || {};
+  let description = page.description || page.excerpt || page.content || site[page.lang]?.description || config.description || page.title
 
   if (description) {
     description = escapeHTML(stripHTML(description).substring(0, 150)
@@ -114,6 +115,10 @@ hexo.extend.helper.register('page_keywords', function () {
   ]
   if (keywords.length) {
     return keywords.join(',')
+  }
+  if (config.site && config.site[page.lang]) {
+    const keywords = config.site[page.lang].keywords;
+    return Array.isArray(keywords) ? (keywords).join(','):  ([]).join(',') || keywords
   }
   return Array.isArray(config.keywords) ? (config.keywords).join(','):  ([]).join(',') || config.keywords
 })

@@ -45,7 +45,7 @@ hexo.extend.helper.register('findArchiveLength', function (func) {
     return dateObj
   }
 
-  const data = func('createArchiveObj', () => {
+  const data = func(`createArchiveObj_${this.page.lang}`, () => {
     const yearObj = yearly ? generateDateObj('year') : []
     const monthObj = monthly ? generateDateObj('month') : []
     const dayObj = daily ? generateDateObj('day') : []
