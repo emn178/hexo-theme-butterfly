@@ -11,10 +11,12 @@ if theme.baidu_analytics
 if theme.google_analytics
   script(async src=`https://www.googletagmanager.com/gtag/js?id=${theme.google_analytics}`)
   script.
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '!{theme.google_analytics}');
+    if (location.host !== 'localhost:4000') {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '!{theme.google_analytics}');
+    }
 
 if theme.cloudflare_analytics
   script(defer data-pjax src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon=`{"token": "${theme.cloudflare_analytics}"}`)
