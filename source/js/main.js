@@ -765,7 +765,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.lazyLoadInstance = new LazyLoad({
       elements_selector: 'iframe,img',
       threshold: 0,
-      data_src: 'lazy-src'
+      data_src: 'src'
     })
 
     const lazyIframeLoad = (e) => {
@@ -777,7 +777,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    for (let element of document.querySelectorAll('iframe[data-lazy-src]')) {
+    for (let element of document.querySelectorAll('iframe[data-src]')) {
       element.addEventListener('load', lazyIframeLoad)
     }
   }

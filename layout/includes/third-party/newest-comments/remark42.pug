@@ -24,7 +24,7 @@ script.
           result += '<div class=\'aside-list-item\'>'
 
           if (!{theme.newest_comments.avatar}) {
-            const name = '!{theme.lazyload.enable ? "data-lazy-src" : "src"}'
+            const name = '!{theme.lazyload.enable ? "data-src" : "src"}'
             result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
           }
 
