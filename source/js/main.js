@@ -772,10 +772,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const lazyIframeLoad = (e) => {
       e.target.removeEventListener('load', lazyIframeLoad)
-      if (e.target.contentDocument && e.target.contentDocument.head) {
+      if (!e.target.contentDocument) {
+        return;
+      }
+      if (e.target.contentDocument.head) {
         const style = document.createElement('style')
         style.textContent = 'body { display: flex; align-items: center; justify-content: center }'
         e.target.contentDocument.head.appendChild(style)
+      } else if (e.target.contentDocument.documentElement && e.target.contentDocument.documentElement.tagName === 'svg') {
+        e.target.contentDocument.documentElement.style.cssText = 'margin:50vh auto 0 auto;transform:translateY(-50%)';
       }
     }
 
@@ -833,10 +838,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   window.initLazyLoad = function () {
     window.lazyLoadInstance = new LazyLoad({
-      elements_selector: 'iframe,img',
+      elements_selector: 'img',
       threshold: 0,
       data_src: 'src'
     })
+    setTimeout(function () {
+      window.iframeLazyLoadInstance = new LazyLoad({
+        elements_selector: 'iframe',
+        threshold: 0,
+        data_src: 'src'
+      })
+    }, 1000);
   }
   window.runLightbox = runLightbox;
 
