@@ -81,8 +81,11 @@ beautify()
     margin: 0 auto 20px
     max-width: 100%
     transition: filter 375ms ease-in .2s
-    object-fit: contain
+    object-fit: none
     max-height: 500px
+
+    &.loaded
+      object-fit: contain
 
     +maxWidth900()
       max-height: 300px

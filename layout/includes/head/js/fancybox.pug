@@ -1,0 +1,10 @@
+script.
+  delayScripts.push({
+    delay: maybeMobile ? 2000 : 1000,
+    src: '!{ url_for(theme.asset.fancybox_v4) }',
+    onload: () => runLightbox()
+  });
+  delayStyles.push({
+    delay: maybeMobile ? 2000 : 1000,
+    href: '!{ url_for(theme.asset.fancybox_css_v4) }'
+  });

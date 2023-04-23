@@ -762,11 +762,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const lazyloadImg = () => {
-    window.lazyLoadInstance = new LazyLoad({
-      elements_selector: 'iframe,img',
-      threshold: 0,
-      data_src: 'src'
-    })
+    // if (window.LazyLoad) {
+    //   window.lazyLoadInstance = new LazyLoad({
+    //     elements_selector: 'iframe,img',
+    //     threshold: 0,
+    //     data_src: 'src'
+    //   })
+    // }
 
     const lazyIframeLoad = (e) => {
       e.target.removeEventListener('load', lazyIframeLoad)
@@ -804,6 +806,40 @@ document.addEventListener('DOMContentLoaded', function () {
     GLOBAL_CONFIG.copyright !== undefined && addCopyright()
   }
 
+  const loadDelayLibs = function () {
+    delayScripts.forEach((script) => {
+      setTimeout(() => {
+        var element = document.createElement('script');
+        element.async = true;
+        element.src = script.src;
+        element.onload = script.onload;
+        document.body.appendChild(element);
+      }, script.delay || 0);
+    });
+    delayStyles.forEach((style) => {
+      setTimeout(() => {
+        var link = document.createElement('link');
+        link.href = style.href;
+        link.rel = 'preload';
+        link.as = 'style';
+        link.onload = function () {
+          this.onload = null;
+          this.rel = 'stylesheet';
+        };
+        document.head.appendChild(link);
+      }, style.delay || 0);
+    });
+  }
+
+  window.initLazyLoad = function () {
+    window.lazyLoadInstance = new LazyLoad({
+      elements_selector: 'iframe,img',
+      threshold: 0,
+      data_src: 'src'
+    })
+  }
+  window.runLightbox = runLightbox;
+
   window.refreshFn = function () {
     initAdjust()
 
@@ -826,7 +862,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const $jgEle = document.querySelectorAll('#article-container .fj-gallery')
     $jgEle.length && runJustifiedGallery($jgEle)
 
-    runLightbox()
+    // runLightbox()
     addTableWrap()
     clickFnOfTagHide()
     tabsFn.clickFnOfTabs()
@@ -837,4 +873,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   refreshFn()
   unRefreshFn()
+  loadDelayLibs()
 })

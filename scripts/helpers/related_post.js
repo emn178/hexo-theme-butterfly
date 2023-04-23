@@ -59,7 +59,7 @@ hexo.extend.helper.register('related_posts', function (currentPost, allPosts) {
         result += `<div class="cover" style="background: ${cover}"></div>`
       }
       if (dateType === 'created') {
-        result += `<div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> ${this.date(relatedPosts[i].created, hexoConfig.date_format)}</div>`
+        result += `<div class="content is-center"><div class="date"><i class="fas fa-calendar-alt fa-fw"></i> ${this.date(relatedPosts[i].created, hexoConfig.date_format)}</div>`
       } else {
         result += `<div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> ${this.date(relatedPosts[i].updated, hexoConfig.date_format)}</div>`
       }

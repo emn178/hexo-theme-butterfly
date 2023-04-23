@@ -7,14 +7,14 @@ div
 
   if theme.medium_zoom
     script(src=url_for(theme.asset.medium_zoom))
-  else if theme.fancybox
-    script(defer src=url_for(theme.asset.fancybox_v4))
+  //- else if theme.fancybox
+  //-   script(defer src=url_for(theme.asset.fancybox_v4))
 
   if theme.instantpage
     script(src=url_for(theme.asset.instantpage), type='module')
 
-  if theme.lazyload.enable
-    script(defer src=url_for(theme.asset.lazyload))
+  //- if theme.lazyload.enable
+  //-   script(defer src=url_for(theme.asset.lazyload))
 
   if theme.snackbar.enable
     script(src=url_for(theme.asset.snackbar))

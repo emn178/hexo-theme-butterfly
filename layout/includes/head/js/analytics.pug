@@ -1,0 +1,31 @@
+script.
+  if (location.host !== 'localhost:4000') {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '!{theme.google_analytics}');
+    gtag({ event: 'gtm.js', 'gtm.start': new Date().getTime(), 'gtm.uniqueEventId': 0 });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initGTM, 3500);
+  });
+  document.addEventListener('scroll', initGTMOnEvent);
+  document.addEventListener('mousemove', initGTMOnEvent);
+  document.addEventListener('touchstart', initGTMOnEvent);
+
+  function initGTMOnEvent(e) {
+    document.removeEventListener(event.type, initGTMOnEvent);
+    initGTM();
+  }
+
+  function initGTM() {
+    if (window.gtmDidInit) {
+      return;
+    }
+    window.gtmDidInit = true;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=!{ url_for(theme.google_analytics) }';
+    document.head.appendChild(script);
+  }

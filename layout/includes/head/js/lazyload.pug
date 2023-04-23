@@ -1,0 +1,6 @@
+script.
+  delayScripts.push({
+    delay: maybeMobile ? 1000 : 0,
+    src: '!{ url_for(theme.asset.lazyload) }',
+    onload: () => initLazyLoad()
+  });

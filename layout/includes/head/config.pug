@@ -83,6 +83,9 @@
       highlightHeightLimit: theme.highlight_height_limit
     })
   }
+  function loadScript(path) {
+    return partial(path).replace(/<script.*?>/, '').replace(/<\/script>/, '');
+  }
 
 script.
   const GLOBAL_CONFIG = { 
@@ -126,3 +129,11 @@ script.
       rightside: !{theme.rightside_scroll_percent},
     }
   }
+  const delayScripts = [];
+  const delayStyles = [];
+  const maybeMobile = window.innerWidth <= 800
+
+  !{ theme.lazyload.enable ? loadScript('js/lazyload') : '' }
+  !{ theme.fancybox ? loadScript('js/fancybox') : '' }
+  !{ theme.sharejs.enable ? loadScript('js/sharejs') : '' }
+  !{ theme.google_analytics ? loadScript('js/analytics') : '' }

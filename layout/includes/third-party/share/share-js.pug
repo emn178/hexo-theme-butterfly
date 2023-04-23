@@ -1,6 +1,6 @@
 - const coverVal = page.cover_type === 'img' ? page.cover : theme.avatar.img
 .social-share(data-image=url_for(coverVal) data-initialized="true")
   each site in theme.sharejs.sites.split(',')
-    a(class=`social-share-icon icon-${site}` aria-label=`share to ${site}`)
-link(rel='stylesheet' href=url_for(theme.asset.sharejs_css) media="print" onload="this.media='all'")
-script(src=url_for(theme.asset.sharejs) defer)
+    a(href='#' class=`social-share-icon icon-${site}` aria-label=`share to ${site}`)
+//- link(rel='stylesheet' href=url_for(theme.asset.sharejs_css) media="print" onload="this.media='all'")
+//- script(src=url_for(theme.asset.sharejs) defer)
