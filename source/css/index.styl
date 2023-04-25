@@ -22,3 +22,17 @@ if hexo-config('local_search') && hexo-config('local_search.enable')
 
 [data-fancybox]
   cursor pointer
+
+.table-layout-fixed {
+  table {
+    table-layout: fixed;
+  }
+}
+
+#article-container
+  .table-layout-fixed
+    img
+      max-height: 300px
+
+      +maxWidth900()
+        max-height: 150px
