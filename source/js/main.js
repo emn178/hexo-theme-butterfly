@@ -886,4 +886,11 @@ document.addEventListener('DOMContentLoaded', function () {
   refreshFn()
   unRefreshFn()
   loadDelayLibs()
+
+  document.querySelectorAll('.fullscreen-block').forEach((element) => {
+    element.querySelector('.fullscreen').addEventListener('click', () => {
+      element.classList.toggle('fullscreen-active');
+      document.body.classList.toggle('fullscreen-body');
+    });
+  });
 })

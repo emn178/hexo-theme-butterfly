@@ -264,3 +264,47 @@ beautify()
 
   .ads-wrap
     margin: 40px 0
+
+  .fullscreen-block
+    .fullscreen-wrap
+      overflow: auto
+      height: 500px
+      max-height: calc(100vh - 50px)
+
+    .fa-down-left-and-up-right-to-center
+      display: none
+
+    .buttons
+      text-align: right
+      padding: 5px
+
+    &.fullscreen-active
+      position: fixed
+      left: 0
+      top: 0
+      width: 100vw
+      height: 100vh
+      z-index: 100
+      background-color: var(--global-bg)
+
+      .fullscreen-wrap
+        height: calc(100% - 44px)
+        max-height: initial
+
+      .fa-down-left-and-up-right-to-center
+        display: inline
+
+      .fa-up-right-and-down-left-from-center
+        display: none
+
+  .button
+    padding: 5px
+    border-radius: 5px
+    color: var(--btn-color)
+    background-color: var(--btn-bg)
+
+  .button.active
+    background-color: var(--btn-hover-color)
+
+.fullscreen-body
+  overflow: hidden

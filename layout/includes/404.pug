@@ -5,8 +5,18 @@
 
   #error-wrap
     .error-content
-      .error-img
-        img(src=url_for(top_img_404) alt='Page not found')
       .error-info
         h1.error_title= '404'
         .error_subtitle= theme.error_404.subtitle || _p('error404')
+        div
+          a(href='/en/') English Home
+        div
+          a(href='/zh-TW/') 中文首頁
+
+  //- #error-wrap
+  //-   .error-content
+  //-     .error-img
+  //-       img(src=url_for(top_img_404) alt='Page not found')
+  //-     .error-info
+  //-       h1.error_title= '404'
+  //-       .error_subtitle= theme.error_404.subtitle || _p('error404')
