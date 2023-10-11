@@ -1,5 +1,8 @@
 if hexo-config('error_404.enable')
   .error404
+    & + #rightside
+      display: none
+
     #error-wrap
       position: absolute
       top: 50%
@@ -64,6 +67,3 @@ if hexo-config('error_404.enable')
             word-break: break-word
             font-size: 1.6em
             -webkit-line-clamp: 2
-
-    & + #rightside
-      display: none

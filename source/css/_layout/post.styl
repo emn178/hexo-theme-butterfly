@@ -266,10 +266,43 @@ beautify()
     margin: 40px 0
 
   .fullscreen-block
+    &[data-show="25"] .fullscreen-wrap img
+      width: 128px
+      height: 128px
+
+    &[data-show="100"] .fullscreen-wrap img
+      width: 512px
+      height: 512px
+
     .fullscreen-wrap
       overflow: auto
       height: 500px
       max-height: calc(100vh - 50px)
+
+      img
+        width: 256px
+        height: 256px
+        max-width: none
+        max-height: none
+        margin: 0
+
+      .table-wrap
+        overflow: visible
+
+      thead th
+        position: sticky
+        top: 0
+        z-index: 1
+
+      tbody th
+        position: sticky
+        left: 0
+
+      th
+        color: white
+        background-color: #00c4b6
+        font-size: 12px
+        white-space: normal
 
     .fa-down-left-and-up-right-to-center
       display: none

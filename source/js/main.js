@@ -892,5 +892,15 @@ document.addEventListener('DOMContentLoaded', function () {
       element.classList.toggle('fullscreen-active');
       document.body.classList.toggle('fullscreen-body');
     });
+
+    const show = function (size) {
+      element.querySelector('.button.active').classList.remove('active');
+      element.querySelector(`.show-${size}`).classList.add('active');
+      element.setAttribute('data-show', size);
+    };
+
+    element.querySelector('.show-25').addEventListener('click', () => show(25));
+    element.querySelector('.show-50').addEventListener('click', () => show(50));
+    element.querySelector('.show-100').addEventListener('click', () => show(100));
   });
 })
