@@ -69,6 +69,9 @@ if theme.blog_title_font &&　theme.blog_title_font.font_link
 include ./head/config_site.pug
 include ./head/noscript.pug
 
+each alternate in (page.alternates || [])
+  link(rel="alternate" href=full_url_for(alternate.href) hreflang=alternate.hreflang type="text/html")
+
 !=fragment_cache('injectHeadJs', function(){return inject_head_js()})
 
 !=fragment_cache('injectHead', function(){return injectHtml(theme.inject.head)})
