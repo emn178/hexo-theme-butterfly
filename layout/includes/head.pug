@@ -26,11 +26,44 @@ meta(name="copyright" content=pageCopyright)
 meta(name ="format-detection" content="telephone=no")
 meta(name="theme-color" content=themeColor)
 
+if is_current('/404.html', [strict])
+  meta(name="robots" content="noindex, follow")
+
 //- Open_Graph
 include ./head/Open_Graph.pug
 
+-
+  const siteInfo = config.site[page.lang] || {}
+  const schemaUrl = full_url_for(page.path)
+  const schemaDescription = page_description()
+  const schemaImage = page.cover_type === 'img' ? page.cover : theme.avatar.img
+  const schema = is_post() ? {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: page.title,
+    description: schemaDescription,
+    url: schemaUrl,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': schemaUrl },
+    datePublished: page.date ? date_xml(page.date) : undefined,
+    dateModified: page.updated ? date_xml(page.updated) : undefined,
+    author: { '@type': 'Person', name: siteInfo.author || config.author },
+    image: schemaImage ? full_url_for(schemaImage) : undefined,
+    keywords: page.tags && page.tags.length ? page.tags.map(tag => tag.name).join(', ') : undefined
+  } : is_home() ? {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteInfo.title || config.title,
+    description: schemaDescription,
+    url: schemaUrl,
+    inLanguage: page.lang,
+    author: { '@type': 'Person', name: siteInfo.author || config.author }
+  } : undefined
+if schema
+  script(type="application/ld+json")!= JSON.stringify(schema, (key, value) => value === undefined ? undefined : value).replace(/</g, '\\u003c')
+
 !=favicon_tag(theme.favicon || config.favicon)
-link(rel="canonical" href=urlNoIndex(null,config.pretty_urls.trailing_index,config.pretty_urls.trailing_html))
+if !is_current('/404.html', [strict])
+  link(rel="canonical" href=urlNoIndex(null,config.pretty_urls.trailing_index,config.pretty_urls.trailing_html))
 
 //- 預解析
 !=partial('includes/head/preconnect', {}, {cache: true})
